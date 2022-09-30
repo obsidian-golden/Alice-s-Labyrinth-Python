@@ -1,4 +1,4 @@
-import specialMath
+import specialMath as sM
 
 
 class BaseEntity:
@@ -6,7 +6,7 @@ class BaseEntity:
     # base
 
     level = 1  # max = 50
-    experience_points = 1  # level = round_down((experience_points²/4 * experience_points)* 1/5)
+    experience_points = 1
 
     body = 1
     soul = 1
@@ -25,8 +25,12 @@ class BaseEntity:
     health_max = 1  # level + base_sum * 5/health_reduction
     health = 1  #
 
-    def __init__(self, body, soul, mind, level):
+    def __init__(self, body, soul, mind, xp):
         self.body = body
         self.soul = soul
         self.mind = mind
-        self.level = level
+        self.experience_points = xp
+
+    def calculate_level(self):
+        tlevel = sM.round_down((((self.experience_points ^ 2)/4) * self.experience_points) * 1/5)
+        self.level = sM.in_range(tlevel, 50, 1)
