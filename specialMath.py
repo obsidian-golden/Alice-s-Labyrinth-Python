@@ -1,6 +1,5 @@
 def round_down(number):
-    size = len(str(int(number)))
-    return int(str(number)[:size])
+    return int(str(number).split(".")[0])
 
 
 def in_range(number, maxR=1, minR=0):
