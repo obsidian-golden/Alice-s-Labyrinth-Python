@@ -1,4 +1,5 @@
 import specialMath as sM
+import math
 
 
 class BaseEntity:
@@ -32,5 +33,5 @@ class BaseEntity:
         self.experience_points = xp
 
     def calculate_level(self):
-        tlevel = sM.round_down((((self.experience_points ^ 2)/4) * self.experience_points) * 1/5)
-        self.level = sM.in_range(tlevel, 50, 1)
+        tlevel = math.sqrt(self.experience_points-2)
+        self.level = sM.in_range(int(tlevel), 50, 1)
