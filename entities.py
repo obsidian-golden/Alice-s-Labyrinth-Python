@@ -34,4 +34,4 @@ class BaseEntity:
 
     def calculate_level(self):
         tlevel = math.sqrt(self.experience_points-2)
-        self.level = sM.in_range(int(tlevel), 50, 1)
+        self.level = sM.clamp(int(tlevel), 1, 50)
