@@ -5,12 +5,13 @@ import math
 class BaseEntity:
 
     # base
-    def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, level=0, earth=1, water=1, energy=1, life=1):
+    def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, level=0, none=1, earth=1, water=1, energy=1, life=1):
         self.body = body
         self.mind = mind
         self.soul = soul
         self.level = sM.clamp(level, 1, 50)
         self.health_base = hp_b
+        self.none_base = none
         self.earth_base = earth
         self.water_base = water
         self.energy_base = energy
@@ -48,18 +49,18 @@ class BaseEntity:
 
     # skills
 
-    skill_1 = 0
-    skill_2 = 0
-    skill_3 = 0
-    skill_4 = 0
-    skill_5 = 0
-    skill_6 = 0
-    skill_7 = 0
-    skill_8 = 0
+    skill_1 = None
+    skill_2 = None
+    skill_3 = None
+    skill_4 = None
+    skill_5 = None
+    skill_6 = None
+    skill_7 = None
+    skill_8 = None
 
     def get_skill(self, skill):
         if skill < 1 or skill > 8:
-            return 0
+            return None
         elif skill == 1:
             return self.skill_1
         elif skill == 2:
@@ -76,6 +77,25 @@ class BaseEntity:
             return self.skill_7
         elif skill == 8:
             return self.skill_8
+
+    def get_quantity_skills(self):
+        for x in range(1, 9):
+            if self.get_skill(x) is None:
+                return x - 1
+        return 8
+
+    def get_open_slot(self):
+        x = self.get_quantity_skills()
+        if x < 8:
+            return x + 1
+        else:
+            return 0
+
+    def has_open_slot(self):
+        if self.get_open_slot() == 0:
+            return False
+        else:
+            return True
 
 
 class Player(BaseEntity):
