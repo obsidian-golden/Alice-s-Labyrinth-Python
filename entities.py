@@ -5,13 +5,13 @@ import math
 class BaseEntity:
 
     # base
-    def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, level=0, none=1, earth=1, water=1, energy=1, life=1):
+    def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, level=1, typeless=1, earth=1, water=1, energy=1, life=1):
         self.body = body
         self.mind = mind
         self.soul = soul
         self.level = sM.clamp(level, 1, 50)
         self.health_base = hp_b
-        self.none_base = none
+        self.typeless_base = typeless
         self.earth_base = earth
         self.water_base = water
         self.energy_base = energy
@@ -19,6 +19,38 @@ class BaseEntity:
         self.update_all_stats()
         self.name = name
 
+    def get_body(self):
+        return self.body
+
+    def get_mind(self):
+        return self.mind
+
+    def get_soul(self):
+        return self.soul
+
+    def get_level(self):
+        return self.level
+
+    def get_health_base(self):
+        return self.health_base
+
+    def get_typeless_base(self):
+        return self.get_typeless_base()
+
+    def get_earth_base(self):
+        return self.earth_base
+
+    def get_water_base(self):
+        return self.water_base
+
+    def get_energy_base(self):
+        return self.energy_base
+
+    def get_life_base(self):
+        return self.life_base
+
+    def get_name(self):
+        return self.name
     # derived
 
     base_sum = 1  # body + soul + mind
@@ -30,6 +62,24 @@ class BaseEntity:
 
     health_max = 1  # level + base_sum * 50/health_reduction
     health = 1
+
+    def get_base_sum(self):
+        return self.base_sum
+
+    def get_stamina(self):
+        return self.stamina
+
+    def get_focus(self):
+        return self.focus
+
+    def get_determination(self):
+        return self.determination
+
+    def get_heath_max(self):
+        return self.health_max
+
+    def get_health(self):
+        return self.health
 
     def update_base_sum(self):
         self.base_sum = self.body + self.soul + self.mind
@@ -101,6 +151,9 @@ class BaseEntity:
 class Player(BaseEntity):
 
     experience_points = 0
+
+    def get_experience_points(self):
+        return self.experience_points
 
     def get_level_from_xp(self):
         return sM.clamp(int(math.sqrt(self.experience_points - 2)), 1, 50)
