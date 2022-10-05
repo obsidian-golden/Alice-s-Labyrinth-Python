@@ -7,7 +7,7 @@ def clamp(number, minR, maxR):
 
 
 def in_range(number, maxR, minR):
-    if maxR > number > minR:
+    if maxR >= number >= minR:
         return True
     else:
         return False
