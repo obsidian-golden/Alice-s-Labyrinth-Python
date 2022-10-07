@@ -1,11 +1,10 @@
 import specialMath as sM
-import math
 
 
 class BaseEntity:
 
     # base
-    def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, level=1, none=1, earth=1, water=1, energy=1, life=1):
+    def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, level=1, none=1, earth=1, water=1, energy=1, life=1, c_class=0):
         self.body = body
         self.mind = mind
         self.soul = soul
@@ -18,6 +17,7 @@ class BaseEntity:
         self.life_base = life
         self.update_all_stats()
         self.name = name
+        self.combat_class = c_class
 
     def get_body(self):
         return self.body
@@ -87,7 +87,7 @@ class BaseEntity:
     focus = 1  # mind heavy
     determination = 1  # soul heavy
 
-    health_max = 1  # level + base_sum * 50/health_reduction
+    health_max = 1  # level + base_sum * health_base
     health = 1
 
     def get_base_sum(self):
@@ -173,5 +173,3 @@ class BaseEntity:
             return False
         else:
             return True
-
-
