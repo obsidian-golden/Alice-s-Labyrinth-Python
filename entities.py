@@ -5,13 +5,13 @@ import math
 class BaseEntity:
 
     # base
-    def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, level=1, typeless=1, earth=1, water=1, energy=1, life=1):
+    def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, level=1, none=1, earth=1, water=1, energy=1, life=1):
         self.body = body
         self.mind = mind
         self.soul = soul
         self.level = sM.clamp(level, 1, 50)
         self.health_base = hp_b
-        self.typeless_base = typeless
+        self.none_base = none
         self.earth_base = earth
         self.water_base = water
         self.energy_base = energy
@@ -34,8 +34,8 @@ class BaseEntity:
     def get_health_base(self):
         return self.health_base
 
-    def get_typeless_base(self):
-        return self.get_typeless_base()
+    def get_none_base(self):
+        return self.none_base
 
     def get_earth_base(self):
         return self.earth_base
@@ -49,8 +49,35 @@ class BaseEntity:
     def get_life_base(self):
         return self.life_base
 
+    def get_element_original(self, x):
+        if x == 0:
+            return self.get_none_base()
+        elif x == 1:
+            return self.get_earth_base()
+        elif x == 2:
+            return self.get_water_base()
+        elif x == 3:
+            return self.get_energy_base()
+        elif x == 4:
+            return self.get_life_base()
+        else:
+            return 0
+
+    def get_element_real(self, x):
+        if 0 <= x <= 4:
+            return sM.real_element_state(self.get_element_original(0), self.get_element_original(x))
+        elif 5 <= x <= 9:
+            return sM.real_element_state(self.get_element_original(1), self.get_element_original(x-5))
+        elif 10 <= x <= 14:
+            return sM.real_element_state(self.get_element_original(2), self.get_element_original(x-10))
+        elif 15 <= x <= 19:
+            return sM.real_element_state(self.get_element_original(3), self.get_element_original(x-15))
+        elif 20 <= x <= 24:
+            return sM.real_element_state(self.get_element_original(4), self.get_element_original(x-20))
+
     def get_name(self):
         return self.name
+
     # derived
 
     base_sum = 1  # body + soul + mind
@@ -148,15 +175,3 @@ class BaseEntity:
             return True
 
 
-class Player(BaseEntity):
-
-    experience_points = 0
-
-    def get_experience_points(self):
-        return self.experience_points
-
-    def get_level_from_xp(self):
-        return sM.clamp(int(math.sqrt(self.experience_points - 2)), 1, 50)
-
-    def get_xp_for_next_level(self):
-        return max((((self.level + 1) ^ 2) + 2) - self.experience_points, 0)
