@@ -1,78 +1,41 @@
 import entities
-import specialMath as sM
-import math
+
+player_entity = entities.BaseEntity()
+experience_points = 0
 
 
-class Player(entities.BaseEntity):
+def print_player_info():
+    print("--Player info--")
+    print("Name: " + str(player_entity.get_name()))
 
-    experience_points = 0
+    print("-")
 
-    def get_experience_points(self):
-        return self.experience_points
+    print("Body: " + str(player_entity.get_base_stat(0)))
+    print("Soul: " + str(player_entity.get_base_stat(1)))
+    print("Mind: " + str(player_entity.get_base_stat(2)))
 
-    def set_experience_points(self, xp):
-        if self.experience_points - xp < 0:
-            self.experience_points = 0
-        else:
-            self.experience_points = int(xp)
+    print("-")
 
-    def get_level_from_xp(self):
-        return sM.clamp(int(math.sqrt(self.experience_points - 2)), 1, 50)
+    print("Stamina:       " + str(player_entity.get_stamina()))
+    print("Determination: " + str(player_entity.get_determination()))
+    print("Focus:         " + str(player_entity.get_focus()))
 
-    def get_xp_for_next_level(self):
-        return max((((self.level + 1) ^ 2) + 2) - self.experience_points, 0)
+    print("-")
 
-    # equipment
+    print("Empty:  " + str(player_entity.get_element_original(0)))
+    print("Earth:  " + str(player_entity.get_element_original(1)))
+    print("Water:  " + str(player_entity.get_element_original(2)))
+    print("Energy: " + str(player_entity.get_element_original(3)))
+    print("Life:   " + str(player_entity.get_element_original(4)))
 
-    accessory = None
-    armor = None
-    weapon = None
+    print("-")
 
-    def get_accessory(self):
-        return self.accessory
+    print("Base health: " + str(player_entity.get_health_base()))
+    print("Max health:  " + str(player_entity.get_heath_max()))
+    print("Health:      " + str(player_entity.get_health()))
 
-    def get_armor(self):
-        return self.armor
+    print("-")
 
-    def get_weapon(self):
-        return self.weapon
 
-    def get_equipment_boost(self, x):
-        b = 0
-
-        if self.get_accessory().get_bonus_type_1() == x:
-            b += self.get_accessory().get_bonus_amount_1()
-        if self.get_accessory().get_bonus_type_2() == x:
-            b += self.get_accessory().get_bonus_amount_2()
-        if self.get_accessory().get_bonus_type_3() == x:
-            b += self.get_accessory().get_bonus_amount_3()
-
-        if self.get_armor().get_bonus_type_1() == x:
-            b += self.get_armor().get_bonus_amount_1()
-        if self.get_armor().get_bonus_type_2() == x:
-            b += self.get_armor().get_bonus_amount_2()
-        if self.get_armor().get_bonus_type_3() == x:
-            b += self.get_armor().get_bonus_amount_3()
-
-        if self.get_weapon().get_bonus_type_1() == x:
-            b += self.get_weapon().get_bonus_amount_1()
-        if self.get_weapon().get_bonus_type_2() == x:
-            b += self.get_weapon().get_bonus_amount_2()
-        if self.get_weapon().get_bonus_type_3() == x:
-            b += self.get_weapon().get_bonus_amount_3()
-
-        return b
-
-    def get_element_original(self, x):
-        if x == 0:
-            return self.get_none_base() + self.get_equipment_boost(x)
-        elif x == 1:
-            return self.get_earth_base() + self.get_equipment_boost(x)
-        elif x == 2:
-            return self.get_water_base() + self.get_equipment_boost(x)
-        elif x == 3:
-            return self.get_energy_base() + self.get_equipment_boost(x)
-        elif x == 4:
-            return self.get_life_base() + self.get_equipment_boost(x)
-        else:
-            return 0
+def get_xp_for_next_level(level):
+    return max((((level + 1) ^ 2) + 2))

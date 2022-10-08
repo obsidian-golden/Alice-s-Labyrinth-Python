@@ -1,35 +1,82 @@
+import player
+import entities
+
+separator = "-----"
 state = 0
 action = 0
+
 while state == 0:
     print("[1]Start new game")
     print("[2]Load game")
     print("[3]exit")
     action = input("Choose a option: ")
-    print("-----")
     if action == 3:
         state = -1
     if action == 2:
+        print(separator)
         print("not supported yet")
     if action == 1:
-        print("not supported yet")
-    print("-----")
+        state = 1
+    print(separator)
     action = 0
 
 if state == 1:
+    print("Character creation")
     stp = {"name": "",
            "body": 1,
            "soul": 1,
            "mind": 1,
            "hp_b": 5,
-           "level": 1,
-           "none": 1,
-           "earth": 1,
-           "water": 1,
-           "energy": 1,
-           "life": 1,
-           "c_class": 0
+           "empty": 0,
+           "earth": 0,
+           "water": 0,
+           "energy": 0,
+           "life": 0
            }
-    print("Base stats: body = 1, soul = 1, mind = 1, base health = 5")
-    print("Base elemental stats: none = 1, earth = 1, water = 1, energy = 1, life = 1")
-    print("Choose a species:")
-    print("[1]Human: base health = 7, life = 2")
+    print(separator)
+    rep = 3
+    elem = ["empty", "earth", "water", "energy", "life"]
+    while rep > 0:
+        print(str(rep) + " points remaining")
+        print("Choose elemental affinities: ")
+        print("[0]empty")
+        print("[1]earth")
+        print("[2]water")
+        print("[3]energy")
+        print("[4]life")
+        inp = int(input("Choose a option: "))
+        if 0 <= inp <= 4:
+            stp[elem[inp]] += 1
+            print("The " + elem[inp] + " affinity has increased")
+            rep -= 1
+        else:
+            print(separator)
+            print("Invalid choice")
+        print(separator)
+        if rep <= 0:
+            print("Affinity levels:")
+            for x in elem:
+                print(x + " level is " + str(stp[x]))
+            print("[1] confirm")
+            print("[2] reset")
+            inp = int(input("Choose a option: "))
+            print(separator)
+            if inp == 2:
+                rep = 3
+                for x in elem:
+                    stp[x] = 0
+    stp["name"] = input("Choose your name: ")
+    print(separator)
+    player.player_entity = entities.BaseEntity(stp["name"],
+                                               stp["body"],
+                                               stp["soul"],
+                                               stp["mind"],
+                                               stp["hp_b"],
+                                               stp["empty"],
+                                               stp["earth"],
+                                               stp["water"],
+                                               stp["energy"],
+                                               stp["life"])
+    print("Player creation has been completed")
+    player.print_player_info()
+    print(separator)

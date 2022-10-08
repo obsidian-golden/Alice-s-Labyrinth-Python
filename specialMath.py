@@ -13,5 +13,5 @@ def in_range(number, maxR, minR):
         return False
 
 
-def real_element_state(x , y):
+def real_element_state(x, y):
     return int(((3 * x) + y)/4)
