@@ -116,9 +116,9 @@ class BaseEntity:
         self.base_sum = self.get_base_stat(0) + self.get_base_stat(1) + self.get_base_stat(2)
 
     def update_constitutions(self):
-        self.stamina = (self.get_base_stat(0) + self.base_sum) / 2
-        self.focus = (self.get_base_stat(1) + self.base_sum) / 2
-        self.determination = (self.get_base_stat(2) + self.base_sum) / 2
+        self.stamina = int((self.get_base_stat(0) + self.base_sum) / 2)
+        self.focus = int((self.get_base_stat(1) + self.base_sum) / 2)
+        self.determination = int((self.get_base_stat(2) + self.base_sum) / 2)
 
     def update_max_health(self):
         self.health_max = int(self.health_base * self.base_sum)

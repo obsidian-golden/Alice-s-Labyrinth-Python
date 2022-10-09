@@ -1,40 +1,19 @@
 import entities
 
-player_entity = entities.BaseEntity()
-experience_points = 0
 
+class Player:
+    player_entity = entities.BaseEntity()
+    player_exist = False
+    experience_points = 0
 
-def print_player_info():
-    print("--Player info--")
-    print("Name: " + str(player_entity.get_name()))
+    def create_player(self, name="", body=1, soul=1, mind=1, hp_b=5, empty=0, earth=0, water=0, energy=0, life=0):
+        if self.player_exist:
+            return
+        self.player_entity = entities.BaseEntity(name, body, soul, mind, hp_b, empty, earth, water, energy, life)
+        self.player_exist = True
 
-    print("-")
-
-    print("Body: " + str(player_entity.get_base_stat(0)))
-    print("Soul: " + str(player_entity.get_base_stat(1)))
-    print("Mind: " + str(player_entity.get_base_stat(2)))
-
-    print("-")
-
-    print("Stamina:       " + str(player_entity.get_stamina()))
-    print("Determination: " + str(player_entity.get_determination()))
-    print("Focus:         " + str(player_entity.get_focus()))
-
-    print("-")
-
-    print("Empty:  " + str(player_entity.get_element_original(0)))
-    print("Earth:  " + str(player_entity.get_element_original(1)))
-    print("Water:  " + str(player_entity.get_element_original(2)))
-    print("Energy: " + str(player_entity.get_element_original(3)))
-    print("Life:   " + str(player_entity.get_element_original(4)))
-
-    print("-")
-
-    print("Base health: " + str(player_entity.get_health_base()))
-    print("Max health:  " + str(player_entity.get_heath_max()))
-    print("Health:      " + str(player_entity.get_health()))
-
-    print("-")
+    def get_player_entity(self):
+        return self.player_entity
 
 
 def get_xp_for_next_level(level):
