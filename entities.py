@@ -213,7 +213,7 @@ class BaseEntity:
             return False
 
     def lower_cooldown(self):
-        for x in range(1,9):
+        for x in range(1, 9):
             if self.get_skill(x) is not None:
                 self.get_skill(x).lower_cooldown()
 

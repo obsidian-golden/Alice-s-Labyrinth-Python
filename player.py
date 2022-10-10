@@ -17,10 +17,8 @@ class Player:
     def get_player_entity(self):
         return self.player_entity
 
-    def give_starting_items(self):
-        self.backpack.append(equipment.load_equipment(1))
-        self.backpack.append(equipment.load_equipment(2))
-        self.backpack.append(equipment.load_equipment(3))
+    def add_item(self, x):
+        self.backpack.append(equipment.load_equipment(x))
 
 
 def get_xp_for_next_level(level):
