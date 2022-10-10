@@ -30,15 +30,12 @@ def print_player_info(player):
 
     print("-")
 
-    print("Body: " + str(player.player_entity.get_base_stat(0)))
-    print("Soul: " + str(player.player_entity.get_base_stat(1)))
-    print("Mind: " + str(player.player_entity.get_base_stat(2)))
-
-    print("-")
-
-    print("Stamina:       " + str(player.player_entity.get_stamina()))
-    print("Determination: " + str(player.player_entity.get_determination()))
-    print("Focus:         " + str(player.player_entity.get_focus()))
+    print("Physical attack:   " + str(player.player_entity.get_combat_stat(0)))
+    print("Physical defence:  " + str(player.player_entity.get_combat_stat(1)))
+    print("Spiritual attack:  " + str(player.player_entity.get_combat_stat(2)))
+    print("Spiritual defence: " + str(player.player_entity.get_combat_stat(3)))
+    print("Mental attack:     " + str(player.player_entity.get_combat_stat(4)))
+    print("mental defence:    " + str(player.player_entity.get_combat_stat(5)))
 
     print("-")
 
@@ -50,7 +47,6 @@ def print_player_info(player):
 
     print("-")
 
-    print("Base health: " + str(player.player_entity.get_health_base()))
     print("Max health:  " + str(player.player_entity.get_heath_max()))
     print("Health:      " + str(player.player_entity.get_health()))
 

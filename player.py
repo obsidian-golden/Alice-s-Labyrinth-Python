@@ -1,10 +1,12 @@
 import entities
+import equipment
 
 
 class Player:
     player_entity = entities.BaseEntity()
     player_exist = False
     experience_points = 0
+    backpack = []
 
     def create_player(self, name="", body=1, soul=1, mind=1, hp_b=5, empty=0, earth=0, water=0, energy=0, life=0):
         if self.player_exist:
@@ -14,6 +16,11 @@ class Player:
 
     def get_player_entity(self):
         return self.player_entity
+
+    def give_starting_items(self):
+        self.backpack.append(equipment.load_equipment(1))
+        self.backpack.append(equipment.load_equipment(2))
+        self.backpack.append(equipment.load_equipment(3))
 
 
 def get_xp_for_next_level(level):

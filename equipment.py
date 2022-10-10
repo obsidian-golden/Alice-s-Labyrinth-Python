@@ -13,17 +13,20 @@ def load_equipment(equip_id):
 
 
 class BaseEquipment:
-    def __init__(self, name="", slot=0, b_t_1=0, b_a_1=0, b_t_2=0, b_a_2=0, b_t_3=0, b_a_3=0):
+    def __init__(self, name="", slot=0, b_t_1=0, b_a_1=0, b_t_2=0, b_a_2=0, b_t_3=0, b_a_3=0, b_t_4=0, b_a_4=0):
         self.name = name
         # 0 = accessory, 1 = armor, 2 = weapon
         self.slot = slot
-        # 0 = "none", 1 = earth, 2 = water, 3 = energy, 4 = life, 5 = body, 6 = soul, 7 = mind
+        # 0 = empty, 1 = earth, 2 = water, 3 = energy, 4 = life
         self.bonus_type_1 = b_t_1
         self.bonus_amount_1 = b_a_1
         self.bonus_type_2 = b_t_2
         self.bonus_amount_2 = b_a_2
+        # 0 = p attack, 1 = p defense, 2 = s attack, 3 = s defense, 4 = m attack, 5 = m defense
         self.bonus_type_3 = b_t_3
         self.bonus_amount_3 = b_a_3
+        self.bonus_type_4 = b_t_4
+        self.bonus_amount_4 = b_a_4
 
     def get_name(self):
         return self.name
@@ -48,3 +51,9 @@ class BaseEquipment:
 
     def get_bonus_amount_3(self):
         return self.bonus_amount_3
+
+    def get_bonus_type_4(self):
+        return self.bonus_type_4
+
+    def get_bonus_amount_4(self):
+        return self.bonus_amount_4

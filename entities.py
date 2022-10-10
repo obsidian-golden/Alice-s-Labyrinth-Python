@@ -46,24 +46,24 @@ class BaseEntity:
 
     def get_base_stat(self, x):
         if x == 0:
-            return self.get_body() + self.get_equipment_boost(x + 5)
+            return self.get_body()
         if x == 1:
-            return self.get_soul() + self.get_equipment_boost(x + 5)
+            return self.get_soul()
         if x == 2:
-            return self.get_mind() + self.get_equipment_boost(x + 5)
+            return self.get_mind()
         return 0
 
     def get_element_original(self, x):
         if x == 0:
-            return self.get_empty_base() + self.get_equipment_boost(x)
+            return self.get_empty_base() + self.get_equipment_boost_elemental(x)
         elif x == 1:
-            return self.get_earth_base() + self.get_equipment_boost(x)
+            return self.get_earth_base() + self.get_equipment_boost_elemental(x)
         elif x == 2:
-            return self.get_water_base() + self.get_equipment_boost(x)
+            return self.get_water_base() + self.get_equipment_boost_elemental(x)
         elif x == 3:
-            return self.get_energy_base() + self.get_equipment_boost(x)
+            return self.get_energy_base() + self.get_equipment_boost_elemental(x)
         elif x == 4:
-            return self.get_life_base() + self.get_equipment_boost(x)
+            return self.get_life_base() + self.get_equipment_boost_elemental(x)
         else:
             return 0
 
@@ -90,6 +90,13 @@ class BaseEntity:
     stamina = 1  # body heavy
     focus = 1  # mind heavy
     determination = 1  # soul heavy
+
+    p_attack = 1
+    p_defence = 1
+    s_attack = 1
+    s_defence = 1
+    m_attack = 1
+    m_defence = 1
 
     health_max = 1  # level + base_sum * health_base
     health = 1
@@ -120,6 +127,28 @@ class BaseEntity:
         self.focus = int((self.get_base_stat(1) + self.base_sum) / 2)
         self.determination = int((self.get_base_stat(2) + self.base_sum) / 2)
 
+    def update_combat_stats(self):
+        self.p_attack = (self.stamina * 5)
+        self.p_defence = (self.stamina * 5)
+        self.s_attack = (self.determination * 5)
+        self.s_defence = (self.determination * 5)
+        self.m_attack = (self.focus * 5)
+        self.m_defence = (self.focus * 5)
+
+    def get_combat_stat(self, x=0):
+        if x == 0:
+            return self.p_attack + self.get_equipment_boost_combat(0)
+        if x == 1:
+            return self.p_defence + self.get_equipment_boost_combat(1)
+        if x == 2:
+            return self.s_attack + self.get_equipment_boost_combat(2)
+        if x == 3:
+            return self.s_defence + self.get_equipment_boost_combat(3)
+        if x == 4:
+            return self.m_attack + self.get_equipment_boost_combat(4)
+        if x == 5:
+            return self.m_defence + self.get_equipment_boost_combat(5)
+
     def update_max_health(self):
         self.health_max = int(self.health_base * self.base_sum)
 
@@ -129,6 +158,7 @@ class BaseEntity:
     def update_all_stats(self):
         self.update_base_sum()
         self.update_constitutions()
+        self.update_combat_stats()
         self.update_max_health()
         self.reset_health()
 
@@ -202,30 +232,46 @@ class BaseEntity:
     def get_weapon(self):
         return self.weapon
 
-    def get_equipment_boost(self, x):
+    def get_equipment_boost_elemental(self, x):
         b = 0
         if self.get_accessory() is not None:
             if self.get_accessory().get_bonus_type_1() == x:
                 b += self.get_accessory().get_bonus_amount_1()
             if self.get_accessory().get_bonus_type_2() == x:
                 b += self.get_accessory().get_bonus_amount_2()
-            if self.get_accessory().get_bonus_type_3() == x:
-                b += self.get_accessory().get_bonus_amount_3()
 
         if self.get_armor() is not None:
             if self.get_armor().get_bonus_type_1() == x:
                 b += self.get_armor().get_bonus_amount_1()
             if self.get_armor().get_bonus_type_2() == x:
                 b += self.get_armor().get_bonus_amount_2()
-            if self.get_armor().get_bonus_type_3() == x:
-                b += self.get_armor().get_bonus_amount_3()
 
         if self.get_weapon() is not None:
             if self.get_weapon().get_bonus_type_1() == x:
                 b += self.get_weapon().get_bonus_amount_1()
             if self.get_weapon().get_bonus_type_2() == x:
                 b += self.get_weapon().get_bonus_amount_2()
+
+        return b
+
+    def get_equipment_boost_combat(self, x):
+        b = 0
+        if self.get_accessory() is not None:
+            if self.get_accessory().get_bonus_type_3() == x:
+                b += self.get_accessory().get_bonus_amount_3()
+            if self.get_accessory().get_bonus_type_4() == x:
+                b += self.get_accessory().get_bonus_amount_4()
+
+        if self.get_armor() is not None:
+            if self.get_armor().get_bonus_type_3() == x:
+                b += self.get_armor().get_bonus_amount_3()
+            if self.get_armor().get_bonus_type_4() == x:
+                b += self.get_armor().get_bonus_amount_4()
+
+        if self.get_weapon() is not None:
             if self.get_weapon().get_bonus_type_3() == x:
                 b += self.get_weapon().get_bonus_amount_3()
+            if self.get_weapon().get_bonus_type_4() == x:
+                b += self.get_weapon().get_bonus_amount_4()
 
         return b
