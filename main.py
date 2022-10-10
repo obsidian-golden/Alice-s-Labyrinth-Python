@@ -7,6 +7,11 @@ action = int(gI.get_input())
 
 main_character = player.Player()
 
+
+def main_world():
+    return 0
+
+
 if action == 1:
     plst = characterCreation.character_creation()
     main_character.create_player(plst[0],
@@ -20,3 +25,11 @@ if action == 1:
                                  plst[8],
                                  plst[9])
     gI.print_player_info(main_character)
+    gI.separator()
+    action = 2
+
+if action == 2:
+    action = 1
+    while action > 0:
+        if action == 1:
+            action = main_world()
