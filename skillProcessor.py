@@ -1,19 +1,33 @@
+def get_skill_from_array(stats=None):
+    if stats is None:
+        stats = [0, "", 0, 0, 0, 0, 0, 0]
+    if len(stats) < 8:
+        for x in range(len(stats), 8):
+            if x == 1:
+                stats.append("")
+                continue
+            stats.append(0)
+    if stats[0] == 0:
+        return BaseSkill(stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], stats[6], stats[7])
+
+
 def load_skill(skill_id):
     all_skills = open("Data/Skills.txt", "r")
     result = None
     for skill in all_skills:
         if skill_id == 0:
-            result = skill
+            result = skill.split("|")
         skill_id -= 1
     all_skills.close()
     if result is None:
         return None
-    loaded = BaseSkill(result.split("|").pop())
+    loaded = get_skill_from_array(result)
     return loaded
 
 
 class BaseSkill:
-    def __init__(self, name="", power=0,  dmg_type=0, dmg_target=0, real=0, cool=0, evo=0):
+    def __init__(self, skill_type=0, name="", power=0,  dmg_type=0, dmg_target=0, real=0, cool=0, evo=0):
+        self.skill_type = skill_type
         self.name = name
         self.power = power
 
