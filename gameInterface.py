@@ -6,6 +6,20 @@ def separator():
     print("---------")
 
 
+def get_element_original_string_from_id(x=0):
+    if x < 0 or x > 4:
+        x = 0
+    elem = ["Empty", "Earth", "Water", "Energy", "Life"]
+    return elem[x]
+
+
+def get_combat_stat_string_from_id(x=0):
+    if x < 0 or x > 5:
+        x = 0
+    stat = ["Physical attack", "Physical defence", "Spiritual attack", "Spiritual defence", "Mental attack", "Mental defense"]
+    return stat[x]
+
+
 def print_simple_menu(options="", offset=1):
     counter = 0
     split_options = options.split(",")
@@ -22,6 +36,33 @@ def print_simple_list(options=""):
 
 def print_simple_line(x="a"):
     print(x)
+
+
+def get_equipment_slot_string_from_id(x=0):
+    if x < 0 or x > 2:
+        x = 0
+    slot = ["Accessory", "Armor", "Weapon"]
+    return slot[x]
+
+
+def print_equipment_info(equipment):
+    print(get_equipment_slot_string_from_id(equipment.get_slot()) + ": " + equipment.get_name())
+    if equipment.get_bonus_amount_1() != 0:
+        print(get_element_original_string_from_id(equipment.get_bonus_type_1()) +
+              ": " +
+              str(equipment.get_bonus_amount_1()))
+        if equipment.get_bonus_amount_2() != 0:
+            print(get_element_original_string_from_id(equipment.get_bonus_type_2()) +
+                  ": " +
+                  str(equipment.get_bonus_amount_2()))
+    if equipment.get_bonus_amount_3() != 0:
+        print(get_combat_stat_string_from_id(equipment.get_bonus_type_3()) +
+              ": " +
+              str(equipment.get_bonus_amount_3()))
+        if equipment.get_bonus_amount_4() != 0:
+            print(get_combat_stat_string_from_id(equipment.get_bonus_type_4()) +
+                  ": " +
+                  str(equipment.get_bonus_amount_4()))
 
 
 def print_player_info(player):
@@ -50,4 +91,4 @@ def print_player_info(player):
     print("Max health:  " + str(player.player_entity.get_heath_max()))
     print("Health:      " + str(player.player_entity.get_health()))
 
-    print("-")
+    separator()

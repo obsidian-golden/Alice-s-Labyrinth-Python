@@ -1,3 +1,20 @@
+def equipment_from_string(stats="Default|0|0|00|0|00|0|00|0|00|/n"):
+    for x in stats:
+        print(x)
+    cut = stats.split("|")
+    return BaseEquipment(cut[0],
+                         int(cut[1]),
+                         int(cut[2]),
+                         int(cut[3]),
+                         int(cut[4]),
+                         int(cut[5]),
+                         int(cut[6]),
+                         int(cut[7]),
+                         int(cut[8]),
+                         int(cut[9])
+                         )
+
+
 def load_equipment(equip_id):
     all_skills = open("Data/Equipment.txt", "r")
     result = None
@@ -8,7 +25,7 @@ def load_equipment(equip_id):
     all_skills.close()
     if result is None:
         return BaseEquipment()
-    loaded = BaseEquipment(result.split("|").pop())
+    loaded = equipment_from_string(result)
     return loaded
 
 
