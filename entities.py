@@ -16,6 +16,7 @@ class BaseEntity:
         self.life_base = life
         self.update_all_stats()
         self.name = name
+        self.reset_health()
 
     def get_body(self):
         return self.body
@@ -160,7 +161,6 @@ class BaseEntity:
         self.update_constitutions()
         self.update_combat_stats()
         self.update_max_health()
-        self.reset_health()
 
     # skills
 
@@ -231,6 +231,40 @@ class BaseEntity:
 
     def get_weapon(self):
         return self.weapon
+
+    def get_equipment(self, slot):
+        if slot == 0:
+            return self.get_accessory()
+        if slot == 1:
+            return self.get_armor()
+        if slot == 2:
+            return self.get_weapon()
+        return None
+
+    def set_accessory(self, item):
+        self.accessory = item
+
+    def set_armor(self, item):
+        self.armor = item
+
+    def ser_weapon(self, item):
+        self.weapon = item
+
+    def set_equipment(self, item):
+        if item.get_slot() == 0:
+            self.set_accessory(item)
+        if item.get_slot() == 1:
+            self.set_armor(item)
+        if item.get_slot() == 2:
+            self.ser_weapon(item)
+
+    def remove_equipment(self, slot):
+        if slot == 0:
+            self.accessory = None
+        if slot == 1:
+            self.armor = None
+        if slot == 2:
+            self.weapon = None
 
     def get_equipment_boost_elemental(self, x):
         b = 0

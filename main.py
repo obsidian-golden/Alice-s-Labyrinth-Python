@@ -16,9 +16,10 @@ def print_player_stats():
 
 
 def manage_inventory():
-    gI.print_simple_menu("Show player equipment,Show backpack,Show backpack item info,Back")
+    gI.print_simple_menu("Show player equipment,Show backpack,Equip item,Show backpack item info,Back")
     x = gI.get_input()
     gI.separator()
+
     if x == 1:
         gI.print_simple_line("Player equipment: ")
         if main_character.get_player_entity().get_weapon() is None:
@@ -41,11 +42,16 @@ def manage_inventory():
         for equip in main_character.backpack:
             gI.print_simple_line("[" + str(y) + "] " + equip.get_name())
             y += 1
+
     if x == 3:
+        y = gI.get_input("Choose a item id from the backpack: ")
+        main_character.equip_item(y)
+
+    if x == 4:
         y = gI.get_input("Choose a item id from the backpack: ")
         gI.separator()
         gI.print_equipment_info(main_character.get_backpack_item(y))
-    if x == 4:
+    if x == 5:
         return 1
     gI.separator()
     return 3

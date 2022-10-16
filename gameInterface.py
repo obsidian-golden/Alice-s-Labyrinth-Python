@@ -46,6 +46,8 @@ def get_equipment_slot_string_from_id(x=0):
 
 
 def print_equipment_info(equipment):
+    if equipment is None:
+        print("Not a valid item")
     print(get_equipment_slot_string_from_id(equipment.get_slot()) + ": " + equipment.get_name())
     if equipment.get_bonus_amount_1() != 0:
         print(get_element_original_string_from_id(equipment.get_bonus_type_1()) +
