@@ -8,10 +8,14 @@ def get_skill_from_array(stats=None):
                 continue
             stats.append(0)
     if stats[0] == 0:
-        return BaseSkill(stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], stats[6], stats[7])
+        return BaseSkill(stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], stats[6])
+
+    return None
 
 
 def load_skill(skill_id):
+    if skill_id == 0:
+        return None
     all_skills = open("Data/Skills.txt", "r")
     result = None
     for skill in all_skills:
@@ -26,13 +30,14 @@ def load_skill(skill_id):
 
 
 class BaseSkill:
-    def __init__(self, skill_type=0, name="", power=0,  dmg_type=0, dmg_target=0, real=0, cool=0, evo=0):
+    def __init__(self, skill_type=0, name="", power=0,  dmg_type=0, dmg_target=0, real=0, cool=0):
         self.skill_type = skill_type
         self.name = name
         self.power = power
 
-        # 0 = stamina, 1 = focus, 2 = determination
+        # 0 = physical, 1 = spiritual, 2 = mental
         self.dmg_type = dmg_type
+
         self.dma_target = dmg_target
 
         # 0 = void, 1 = sand, 2 = mist, 3 = darkness, 4 = rot
@@ -43,7 +48,6 @@ class BaseSkill:
 
         self.cooldown = cool
         self.real_type = real
-        self.evolution_id = evo
     timer = 0
 
     def reset_cooldown(self):

@@ -1,6 +1,4 @@
 def equipment_from_string(stats="Default|0|0|00|0|00|0|00|0|00|/n"):
-    for x in stats:
-        print(x)
     cut = stats.split("|")
     return BaseEquipment(cut[0],
                          int(cut[1]),
@@ -16,6 +14,8 @@ def equipment_from_string(stats="Default|0|0|00|0|00|0|00|0|00|/n"):
 
 
 def load_equipment(equip_id):
+    if equip_id == 0:
+        return None
     all_skills = open("Data/Equipment.txt", "r")
     result = None
     for skill in all_skills:

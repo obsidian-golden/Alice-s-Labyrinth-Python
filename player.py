@@ -29,10 +29,12 @@ class Player:
         self.get_player_entity().set_equipment(item_to_equip)
         self.backpack.pop(item)
 
-    def create_player(self, name="", body=1, soul=1, mind=1, hp_b=5, empty=0, earth=0, water=0, energy=0, life=0):
+    def create_player(self, player):
         if self.player_exist:
             return
-        self.player_entity = entities.BaseEntity(name, body, soul, mind, hp_b, empty, earth, water, energy, life)
+        if player is None:
+            player = ["", 1, 1, 1, 20, 3, 0, 0, 0, 0]
+        self.player_entity = entities.get_entity_from_array(player)
         self.player_exist = True
         self.backpack.append(equipment.load_equipment(1))
         self.backpack.append(equipment.load_equipment(2))

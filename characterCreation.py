@@ -4,7 +4,7 @@ import gameInterface as gI
 def character_creation():
     gI.separator()
     gI.print_simple_line("---Character creation---")
-    # name="", body=1, soul=1, mind=1, hp_b=5, empty=0, earth=0, water=0, energy=0, life=0
+    # name="", body=1, soul=1, mind=1, hp_b=20, empty=0, earth=0, water=0, energy=0, life=0
     tp = ["", 1, 1, 1, 20, 0, 0, 0, 0, 0]
     ele = ["empty", "earth", "water", "energy", "life"]
     prm = 3

@@ -1,6 +1,21 @@
 import specialMath as sM
 
 
+def get_entity_from_array(stats=None):
+    if stats is None:
+        stats = ["", 1, 1, 1, 5, 0, 0, 0, 0, 0]
+    return BaseEntity(stats[0],
+                      stats[1],
+                      stats[2],
+                      stats[3],
+                      stats[4],
+                      stats[5],
+                      stats[6],
+                      stats[7],
+                      stats[8],
+                      stats[9])
+
+
 class BaseEntity:
 
     # base
@@ -173,24 +188,24 @@ class BaseEntity:
     skill_7 = None
     skill_8 = None
 
-    def get_skill(self, skill):
-        if skill < 1 or skill > 8:
+    def get_skill(self, skill_slot):
+        if skill_slot < 1 or skill_slot > 8:
             return None
-        elif skill == 1:
+        elif skill_slot == 1:
             return self.skill_1
-        elif skill == 2:
+        elif skill_slot == 2:
             return self.skill_2
-        elif skill == 3:
+        elif skill_slot == 3:
             return self.skill_3
-        elif skill == 4:
+        elif skill_slot == 4:
             return self.skill_4
-        elif skill == 5:
+        elif skill_slot == 5:
             return self.skill_5
-        elif skill == 6:
+        elif skill_slot == 6:
             return self.skill_6
-        elif skill == 7:
+        elif skill_slot == 7:
             return self.skill_7
-        elif skill == 8:
+        elif skill_slot == 8:
             return self.skill_8
 
     def get_quantity_skills(self):
@@ -206,6 +221,37 @@ class BaseEntity:
         else:
             return 0
 
+    def add_skill(self, skill):
+        where = self.get_first_open_skill_slot()
+        if skill is None:
+            return 0
+        elif not self.has_open_skill_slot():
+            return 1
+        elif where == 1:
+            self.skill_1 = skill
+            return 2
+        elif where == 2:
+            self.skill_2 = skill
+            return 2
+        elif where == 3:
+            self.skill_3 = skill
+            return 2
+        elif where == 4:
+            self.skill_4 = skill
+            return 2
+        elif where == 5:
+            self.skill_5 = skill
+            return 2
+        elif where == 6:
+            self.skill_6 = skill
+            return 2
+        elif where == 7:
+            self.skill_7 = skill
+            return 2
+        elif where == 8:
+            self.skill_8 = skill
+            return 2
+
     def has_open_skill_slot(self):
         if 0 <= self.get_quantity_skills() < 8:
             return True
@@ -216,6 +262,39 @@ class BaseEntity:
         for x in range(1, 9):
             if self.get_skill(x) is not None:
                 self.get_skill(x).lower_cooldown()
+
+    def remove_skill(self, skill_slot):
+        if 0 > skill_slot or skill_slot > 8:
+            return 0
+        if self.get_skill(skill_slot) is None:
+            return 1
+        else:
+            for x in range(skill_slot, 9):
+                match x:
+                    case 1:
+                        self.skill_1 = self.skill_2
+                        self.skill_2 = None
+                    case 2:
+                        self.skill_2 = self.skill_3
+                        self.skill_3 = None
+                    case 3:
+                        self.skill_3 = self.skill_4
+                        self.skill_4 = None
+                    case 4:
+                        self.skill_4 = self.skill_5
+                        self.skill_5 = None
+                    case 5:
+                        self.skill_5 = self.skill_6
+                        self.skill_6 = None
+                    case 6:
+                        self.skill_6 = self.skill_7
+                        self.skill_7 = None
+                    case 7:
+                        self.skill_7 = self.skill_8
+                        self.skill_8 = None
+                    case 8:
+                        self.skill_8 = None
+            return 2
 
     # equipment
 
