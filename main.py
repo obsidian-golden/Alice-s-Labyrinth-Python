@@ -65,7 +65,7 @@ def main_world():
     if x == 3:
         return 3
     if x == 5:
-        return 2
+        return 5
     if x == 6:
         return 0
     gI.print_simple_line("Not implemented yet.")
@@ -92,7 +92,8 @@ if action == 2:
     while action > 0:
         if action == 1:
             action = main_world()
-        if action == 2:
-            action = print_player_stats()
         if action == 3:
             action = manage_inventory()
+        if action == 5:
+            action = print_player_stats()
+
