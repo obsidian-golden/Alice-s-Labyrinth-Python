@@ -7,10 +7,7 @@ def get_skill_from_array(stats=None):
                 stats.append("")
                 continue
             stats.append(0)
-    if stats[0] == 0:
-        return BaseSkill(stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], stats[6])
-
-    return None
+    return BaseSkill(stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], stats[6])
 
 
 def load_skill(skill_id):
@@ -38,7 +35,7 @@ class BaseSkill:
         # 0 = physical, 1 = spiritual, 2 = mental
         self.dmg_type = dmg_type
 
-        self.dma_target = dmg_target
+        self.dmg_target = dmg_target
 
         # 0 = void, 1 = sand, 2 = mist, 3 = darkness, 4 = rot
         # 5 = metal, 6 = rock, 7 = crystal, 8 = gravity, 9 = magma
@@ -50,6 +47,12 @@ class BaseSkill:
         self.real_type = real
     timer = 0
 
+    def get_damage_type(self):
+        return self.dmg_type
+
+    def get_damage_target(self):
+        return self.dmg_target
+
     def reset_cooldown(self):
         self.timer = 0
 
@@ -59,6 +62,12 @@ class BaseSkill:
     def lower_cooldown(self):
         if self.timer > 0:
             self.timer -= 1
+
+    def can_use(self):
+        if self.timer <= 0:
+            return True
+        else:
+            return False
 
     def get_name(self):
         return self.name

@@ -7,7 +7,7 @@ class Player:
     player_exist = False
     experience_points = 0
     backpack = []
-    floor = 0
+    floor = 1
 
     def get_backpack_item(self, item):
         if item < 0 or item > len(self.backpack):
@@ -37,7 +37,7 @@ class Player:
         self.player_entity = entities.get_entity_from_array(player)
         self.player_exist = True
         self.backpack.append(equipment.load_equipment(1))
-        self.backpack.append(equipment.load_equipment(2))
+        self.backpack.append(equipment.load_equipment(3))
 
     def get_player_entity(self):
         return self.player_entity

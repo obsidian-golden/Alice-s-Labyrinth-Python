@@ -9,7 +9,7 @@ def equipment_from_string(stats="Default|0|0|00|0|00|0|00|0|00|/n"):
                          int(cut[6]),
                          int(cut[7]),
                          int(cut[8]),
-                         int(cut[9])
+                         int(cut[9]),
                          )
 
 

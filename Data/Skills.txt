@@ -1,3 +1,5 @@
 0|Default|00|000|0|0|
-0|Crab pinch|21|020|0|0|
-0|Crowbar on the chin|05|025|0|0|
+0|Crab pinch|21|005|0|0|
+0|Crowbar on the chin|05|010|0|0|
+0|Elbow hit|20|10|2|1|
+0|Battery acid|13|5|2|1

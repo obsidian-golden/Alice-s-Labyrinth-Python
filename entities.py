@@ -177,6 +177,10 @@ class BaseEntity:
         self.update_combat_stats()
         self.update_max_health()
 
+    def deal_damage(self, damage):
+        self.health -= damage
+        self.health = max(self.health, 0)
+
     # skills
 
     skill_1 = None

@@ -1,7 +1,9 @@
+import battleManager
 import gameInterface as gI
 import characterCreation
 import player
 import worldData as wD
+import battleManager
 
 gI.separator()
 gI.print_simple_menu("Start game,Exit")
