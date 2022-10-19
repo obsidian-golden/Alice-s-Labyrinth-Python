@@ -60,7 +60,7 @@ def manage_inventory():
             gI.separator()
             gI.print_equipment_info(main_character.get_backpack_item(y))
         case 5:
-            return 1
+            return 6
         case _:
             gI.print_simple_line("Invalid choice")
     gI.separator()
@@ -74,6 +74,8 @@ def main_world():
 
     gI.separator()
     match x:
+        case 1:
+            return 1
         case 2:
             return 2
         case 4:
@@ -83,7 +85,7 @@ def main_world():
         case _:
             gI.print_simple_line("Not implemented yet.")
             gI.separator()
-            return 1
+            return 6
 
 
 if action == 1:
@@ -97,15 +99,17 @@ if action == 1:
     action = 2
 
 if action == 2:
-    action = 1
+    action = 6
     while action > 0:
         match action:
             case 1:
-                action = main_world()
+                action = battleManager.battle(main_character)
             case 2:
                 action = manage_inventory()
             case 4:
                 action = print_player_stats()
+            case 6:
+                action = main_world()
             case _:
                 action = 1
 

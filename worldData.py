@@ -14,20 +14,30 @@ def get_floor_name(floor_id):
     return result.split("|")[0]
 
 
+def get_max_floor_encounters(floor_id):
+    f_name = get_floor_name(floor_id)
+    data = open("Data/Floors/" + f_name + "/Extra_data.txt")
+    for line in data:
+        x = line.split("|")[0]
+        break
+    return int(x)
+
+
 def get_random_floor_enemy_encounter(floor_id):
     match floor_id:
         case 1:
             encounters = open("Data/Floors/Beach/Enemy_encounters.txt", "r")
-            max_r = 0
-            for line in encounters:
-                max_r += 1
+            max_r = get_max_floor_encounters(floor_id) - 1
             target = random.randint(0, max_r)
+            result = None
             for line in encounters:
                 if target == 0:
                     result = line
                     break
                 target -= 1
-            else:
-                result = "000|000|000|a"
+            if result is None:
+                result = "001|000|000|"
             encounters.close()
-            return result.split("|").pop()
+            result_list = result.split("|")
+            result_list.pop()
+            return result_list

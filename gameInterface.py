@@ -90,7 +90,7 @@ def print_player_info(player):
 
     print("-")
 
-    print("Max health:  " + str(player.player_entity.get_heath_max()))
+    print("Max health:  " + str(player.player_entity.get_health_max()))
     print("Health:      " + str(player.player_entity.get_health()))
 
     separator()

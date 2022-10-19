@@ -1,5 +1,6 @@
 import entities
 import equipment
+import skillProcessor
 
 
 class Player:
@@ -37,7 +38,11 @@ class Player:
         self.player_entity = entities.get_entity_from_array(player)
         self.player_exist = True
         self.backpack.append(equipment.load_equipment(1))
+        self.backpack.append(equipment.load_equipment(2))
         self.backpack.append(equipment.load_equipment(3))
+        self.player_entity.add_skill(skillProcessor.load_skill(2))
+        self.player_entity.add_skill(skillProcessor.load_skill(3))
+        self.player_entity.add_skill(skillProcessor.load_skill(4))
 
     def get_player_entity(self):
         return self.player_entity

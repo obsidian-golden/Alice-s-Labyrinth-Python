@@ -28,14 +28,14 @@ def load_skill(skill_id):
 
 class BaseSkill:
     def __init__(self, skill_type=0, name="", power=0,  dmg_type=0, dmg_target=0, real=0, cool=0):
-        self.skill_type = skill_type
+        self.skill_type = int(skill_type)
         self.name = name
-        self.power = power
+        self.power = int(power)
 
         # 0 = physical, 1 = spiritual, 2 = mental
-        self.dmg_type = dmg_type
+        self.dmg_type = int(dmg_type)
 
-        self.dmg_target = dmg_target
+        self.dmg_target = int(dmg_target)
 
         # 0 = void, 1 = sand, 2 = mist, 3 = darkness, 4 = rot
         # 5 = metal, 6 = rock, 7 = crystal, 8 = gravity, 9 = magma
@@ -43,8 +43,8 @@ class BaseSkill:
         # 15 = light, 16 = sound, 17 = electricity, 18 = magic, 19 = fire
         # 20 = flesh, 21 = bug, 22 = plant, 23 = mushroom, 24 = dragon
 
-        self.cooldown = cool
-        self.real_type = real
+        self.cooldown = int(cool)
+        self.real_type = int(real)
     timer = 0
 
     def get_damage_type(self):

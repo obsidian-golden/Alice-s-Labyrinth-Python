@@ -20,15 +20,15 @@ class BaseEntity:
 
     # base
     def __init__(self, name="", body=1, soul=1, mind=1, hp_b=5, empty=0, earth=0, water=0, energy=0, life=0):
-        self.body = body
-        self.soul = soul
-        self.mind = mind
-        self.health_base = hp_b
-        self.empty_base = empty
-        self.earth_base = earth
-        self.water_base = water
-        self.energy_base = energy
-        self.life_base = life
+        self.body = int(body)
+        self.soul = int(soul)
+        self.mind = int(mind)
+        self.health_base = int(hp_b)
+        self.empty_base = int(empty)
+        self.earth_base = int(earth)
+        self.water_base = int(water)
+        self.energy_base = int(energy)
+        self.life_base = int(life)
         self.update_all_stats()
         self.name = name
         self.reset_health()
@@ -129,7 +129,7 @@ class BaseEntity:
     def get_determination(self):
         return self.determination
 
-    def get_heath_max(self):
+    def get_health_max(self):
         return self.health_max
 
     def get_health(self):
@@ -152,24 +152,27 @@ class BaseEntity:
         self.m_defence = (self.focus * 5)
 
     def get_combat_stat(self, x=0):
-        if x == 0:
-            return self.p_attack + self.get_equipment_boost_combat(0)
-        if x == 1:
-            return self.p_defence + self.get_equipment_boost_combat(1)
-        if x == 2:
-            return self.s_attack + self.get_equipment_boost_combat(2)
-        if x == 3:
-            return self.s_defence + self.get_equipment_boost_combat(3)
-        if x == 4:
-            return self.m_attack + self.get_equipment_boost_combat(4)
-        if x == 5:
-            return self.m_defence + self.get_equipment_boost_combat(5)
+        match x:
+            case 0:
+                return self.p_attack + self.get_equipment_boost_combat(0)
+            case 1:
+                return self.p_defence + self.get_equipment_boost_combat(1)
+            case 2:
+                return self.s_attack + self.get_equipment_boost_combat(2)
+            case 3:
+                return self.s_defence + self.get_equipment_boost_combat(3)
+            case 4:
+                return self.m_attack + self.get_equipment_boost_combat(4)
+            case 5:
+                return self.m_defence + self.get_equipment_boost_combat(5)
+            case _:
+                return 0
 
     def update_max_health(self):
         self.health_max = int(self.health_base * self.base_sum)
 
     def reset_health(self):
-        self.health = self.get_heath_max()
+        self.health = self.get_health_max()
 
     def update_all_stats(self):
         self.update_base_sum()
@@ -179,7 +182,7 @@ class BaseEntity:
 
     def deal_damage(self, damage):
         self.health -= damage
-        self.health = max(self.health, 0)
+        self.health = int(max(self.health, 0))
 
     # skills
 
