@@ -33,7 +33,7 @@ def character_creation():
             gI.separator()
     prm = 1
     while prm == 1:
-        tp[0] = str(gI.get_input("Choose a name: "))
+        tp[0] = str(gI.get_input("Choose a name: "),1)
         gI.separator()
         gI.print_simple_line("Your name is: " + str(tp[0]))
         gI.print_simple_menu("Confirm,Choose again")

@@ -1,5 +1,14 @@
-def get_input(x="Choose a option: "):
-    return input(x)
+def get_input(text="Choose a option: ", input_type=0):
+    x = input(text)
+    match input_type:
+        case 0:
+            if x == "":
+                return 0
+        case 1:
+            if x == "":
+                return ""
+        case _:
+            return ""
 
 
 def separator():
